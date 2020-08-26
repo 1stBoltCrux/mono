@@ -11,6 +11,7 @@ import { AppFacade } from './+state/app.facade';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ProfileSiteLibModule } from '@mono/profile-site-lib';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { RouterModule } from '@angular/router';
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forFeature(fromApp.APP_FEATURE_KEY, fromApp.reducer),
+    BrowserAnimationsModule,
   ],
   providers: [AppFacade],
   bootstrap: [AppComponent],

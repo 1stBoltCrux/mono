@@ -25,12 +25,12 @@
               "apps/profile-site/src/favicon.ico",
               "apps/profile-site/src/assets"
             ],
-            "styles": ["apps/profile-site/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/profile-site/src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/shared/scss",
-                "apps/profile-site/src/scss"
-              ]
+              "includePaths": ["libs/shared/scss", "apps/profile-site/src/scss"]
             },
             "scripts": []
           },
@@ -220,6 +220,41 @@
             "tsConfig": "libs/shared/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/shared/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "profile-site-lib-src-lib-nav": {
+      "projectType": "library",
+      "root": "libs/profile-site-lib/src/lib/nav",
+      "sourceRoot": "libs/profile-site-lib/src/lib/nav/src",
+      "prefix": "mono",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/profile-site-lib/src/lib/nav/tsconfig.lib.json",
+              "libs/profile-site-lib/src/lib/nav/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/profile-site-lib/src/lib/nav/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile-site-lib/src/lib/nav/jest.config.js",
+            "tsConfig": "libs/profile-site-lib/src/lib/nav/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profile-site-lib/src/lib/nav/src/test-setup.ts"
           }
         }
       },

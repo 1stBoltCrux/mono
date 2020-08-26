@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NavModule } from './nav/src';
 
 @NgModule({
   imports: [
+    NavModule,
     CommonModule,
     RouterModule.forRoot([
       {
@@ -19,5 +21,6 @@ import { RouterModule } from '@angular/router';
     }),
   ],
   declarations: [],
+  exports: [NavModule]
 })
 export class ProfileSiteLibModule {}

@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <span>Ted Leary</span>
+  <span class="spacer"></span>
+  <button mat-mini-fab [matMenuTriggerFor]="menu" aria-label="Menu button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu>
+    <button mat-menu-item>Hello</button>
+    <button mat-menu-item>World</button>
+  </mat-menu>
+</mat-toolbar>
