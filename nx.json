@@ -34,6 +34,9 @@
     },
     "profile-site-lib-src-lib-home": {
       "tags": []
+    },
+    "shared": {
+      "tags": []
     }
   }
 }

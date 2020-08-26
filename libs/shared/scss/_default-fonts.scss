@@ -1,0 +1,47 @@
+%fontRegular {
+  font-family: $regular;
+}
+
+%fontSlab {
+  font-family: $regular-slab;
+}
+
+@mixin font-light {
+  @extend %fontRegular;
+  font-weight: 300;
+}
+
+@mixin font-regular {
+  @extend %fontRegular;
+  font-weight: normal;
+}
+
+@mixin font-medium {
+  @extend %fontRegular;
+  font-weight: 500;
+}
+
+@mixin font-bold {
+  @extend %fontRegular;
+  font-weight: 700;
+}
+
+@mixin font-black {
+  @extend %fontRegular;
+  font-weight: 900;
+}
+
+@mixin font-slab-light {
+  @extend %fontSlab;
+  font-weight: 100;
+}
+
+@mixin font-slab-regular {
+  @extend %fontSlab;
+  font-weight: 300;
+}
+
+@mixin font-slab-bold {
+  @extend %fontSlab;
+  font-weight: normal;
+}

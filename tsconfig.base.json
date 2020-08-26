@@ -19,7 +19,8 @@
       "@mono/profile-site-lib": ["libs/profile-site-lib/src/index.ts"],
       "@mono/profile-site-lib/src/lib/home": [
         "libs/profile-site-lib/src/lib/home/src/index.ts"
-      ]
+      ],
+      "@mono/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
