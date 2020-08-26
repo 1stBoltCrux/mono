@@ -4,8 +4,22 @@
   flex: 1 1 auto;
 }
 
-//material overrides
+.nav-wrapper {
+  margin-bottom: rem(40px);
 
-.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
+  .toolbar-content-wrapper {
+    max-width: rem(1028px);
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+  }
+}
+
+// material overrides
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
   background-color: $blue-munsell;
 }

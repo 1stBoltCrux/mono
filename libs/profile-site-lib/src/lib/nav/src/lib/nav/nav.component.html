@@ -1,18 +1,33 @@
-<mat-toolbar>
-  <span>Ted Leary</span>
-  <span class="spacer"></span>
-  <button mat-mini-fab [matMenuTriggerFor]="menu" aria-label="Menu button">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu>
-    <a mat-menu-item routerLink="home">
-      Home
-    </a>
-    <a mat-menu-item routerLink="about">
-      About
-    </a>
-    <a mat-menu-item routerLink="scratch">
-      Scratch
-    </a>
-  </mat-menu>
-</mat-toolbar>
+<div class="nav-wrapper">
+  <mat-toolbar>
+    <div class="toolbar-content-wrapper">
+      <span>Ted Leary</span>
+      <span class="spacer"></span>
+      <button mat-mini-fab [matMenuTriggerFor]="menu" aria-label="Menu button">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <mat-menu #menu>
+      <a mat-menu-item routerLink="home">
+        <mat-icon>home</mat-icon>
+        <span>
+          Home
+        </span>
+      </a>
+      <a mat-menu-item routerLink="about">
+        <mat-icon>emoji_people</mat-icon>
+        <span>
+          About
+        </span>
+      </a>
+      <a mat-menu-item routerLink="scratch">
+        <mat-icon>construction</mat-icon>
+        <span>
+          Scratch
+        </span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+
+  
+</div>
