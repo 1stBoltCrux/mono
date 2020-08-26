@@ -123,6 +123,73 @@
           }
         }
       }
+    },
+    "profile-site-lib": {
+      "projectType": "library",
+      "root": "libs/profile-site-lib",
+      "sourceRoot": "libs/profile-site-lib/src",
+      "prefix": "mono",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/profile-site-lib/tsconfig.lib.json",
+              "libs/profile-site-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/profile-site-lib/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile-site-lib/jest.config.js",
+            "tsConfig": "libs/profile-site-lib/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profile-site-lib/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "profile-site-lib-src-lib-home": {
+      "projectType": "library",
+      "root": "libs/profile-site-lib/src/lib/home",
+      "sourceRoot": "libs/profile-site-lib/src/lib/home/src",
+      "prefix": "home",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/profile-site-lib/src/lib/home/tsconfig.lib.json",
+              "libs/profile-site-lib/src/lib/home/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/profile-site-lib/src/lib/home/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile-site-lib/src/lib/home/jest.config.js",
+            "tsConfig": "libs/profile-site-lib/src/lib/home/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profile-site-lib/src/lib/home/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

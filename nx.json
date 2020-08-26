@@ -28,6 +28,12 @@
     "profile-site-e2e": {
       "tags": [],
       "implicitDependencies": ["profile-site"]
+    },
+    "profile-site-lib": {
+      "tags": []
+    },
+    "profile-site-lib-src-lib-home": {
+      "tags": []
     }
   }
 }
