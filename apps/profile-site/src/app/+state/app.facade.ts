@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
-
+import { select, Store} from '@ngrx/store';
+import { loadApp } from './app.actions';
 import * as fromApp from './app.reducer';
 import * as AppSelectors from './app.selectors';
 
@@ -13,7 +13,7 @@ export class AppFacade {
 
   constructor(private store: Store<fromApp.AppPartialState>) {}
 
-  dispatch(action: Action) {
-    this.store.dispatch(action);
+  loadApp() {
+    this.store.dispatch(loadApp());
   }
 }

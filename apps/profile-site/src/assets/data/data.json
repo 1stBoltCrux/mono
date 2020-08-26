@@ -1,0 +1,28 @@
+{
+  "projects": [
+    {
+      "name": "Placeholder",
+      "technologies": "Placeholder",
+      "url": "www.google.com",
+      "img": "assets/img.jpg"
+    },
+    {
+      "name": "Placeholder",
+      "technologies": "Placeholder",
+      "url": "www.google.com",
+      "img": "assets/img.jpg"
+    },
+    {
+      "name": "Placeholder",
+      "technologies": "Placeholder",
+      "url": "www.google.com",
+      "img": "assets/img.jpg"
+    },
+    {
+      "name": "Placeholder",
+      "technologies": "Placeholder",
+      "url": "www.google.com",
+      "img": "assets/img.jpg"
+    }
+  ]
+}

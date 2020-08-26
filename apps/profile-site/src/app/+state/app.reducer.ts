@@ -28,8 +28,10 @@ export const initialState: State = appAdapter.getInitialState({
 const appReducer = createReducer(
   initialState,
   on(AppActions.loadApp, (state) => ({ ...state, loaded: false, error: null })),
-  on(AppActions.loadAppSuccess, (state, { app }) =>
-    appAdapter.addAll(app, { ...state, loaded: true })
+  on(AppActions.loadAppSuccess, (state, { app }) => ({
+    ...state,
+    ...app
+  })
   ),
   on(AppActions.loadAppFailure, (state, { error }) => ({ ...state, error }))
 );

@@ -12,10 +12,12 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ProfileSiteLibModule } from '@mono/profile-site-lib';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     RouterModule,
     ProfileSiteLibModule,
