@@ -5,7 +5,14 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu>
-    <button mat-menu-item>Hello</button>
-    <button mat-menu-item>World</button>
+    <a mat-menu-item routerLink="home">
+      Home
+    </a>
+    <a mat-menu-item routerLink="about">
+      About
+    </a>
+    <a mat-menu-item routerLink="scratch">
+      Scratch
+    </a>
   </mat-menu>
 </mat-toolbar>

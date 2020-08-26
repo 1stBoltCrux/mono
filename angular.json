@@ -263,6 +263,76 @@
           "style": "scss"
         }
       }
+    },
+    "profile-site-lib-src-lib-about": {
+      "projectType": "library",
+      "root": "libs/profile-site-lib/src/lib/about",
+      "sourceRoot": "libs/profile-site-lib/src/lib/about/src",
+      "prefix": "mono",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/profile-site-lib/src/lib/about/tsconfig.lib.json",
+              "libs/profile-site-lib/src/lib/about/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/profile-site-lib/src/lib/about/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile-site-lib/src/lib/about/jest.config.js",
+            "tsConfig": "libs/profile-site-lib/src/lib/about/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profile-site-lib/src/lib/about/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "profile-site-lib-src-lib-scratch": {
+      "projectType": "library",
+      "root": "libs/profile-site-lib/src/lib/scratch",
+      "sourceRoot": "libs/profile-site-lib/src/lib/scratch/src",
+      "prefix": "mono",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/profile-site-lib/src/lib/scratch/tsconfig.lib.json",
+              "libs/profile-site-lib/src/lib/scratch/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/profile-site-lib/src/lib/scratch/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile-site-lib/src/lib/scratch/jest.config.js",
+            "tsConfig": "libs/profile-site-lib/src/lib/scratch/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profile-site-lib/src/lib/scratch/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

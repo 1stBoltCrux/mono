@@ -23,6 +23,12 @@
       "@mono/shared": ["libs/shared/src/index.ts"],
       "@mono/profile-site-lib/src/lib/nav": [
         "libs/profile-site-lib/src/lib/nav/src/index.ts"
+      ],
+      "@mono/profile-site-lib/src/lib/about": [
+        "libs/profile-site-lib/src/lib/about/src/index.ts"
+      ],
+      "@mono/profile-site-lib/src/lib/scratch": [
+        "libs/profile-site-lib/src/lib/scratch/src/index.ts"
       ]
     }
   },

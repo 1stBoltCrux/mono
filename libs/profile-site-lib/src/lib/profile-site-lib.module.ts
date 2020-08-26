@@ -7,20 +7,32 @@ import { NavModule } from './nav/src';
   imports: [
     NavModule,
     CommonModule,
-    RouterModule.forRoot([
+    RouterModule.forRoot(
+      [
+        {
+          path: 'home',
+          loadChildren: () =>
+            import('./home/src').then((module) => module.HomeModule),
+        },
+        {
+          path: 'about',
+          loadChildren: () =>
+            import('./about/src').then((module) => module.AboutModule),
+        },
+        {
+          path: 'scratch',
+          loadChildren: () =>
+            import('./scratch/src').then((module) => module.ScratchModule),
+        },
+        { path: '', pathMatch: 'full', redirectTo: 'home' },
+        { path: '**', redirectTo: 'home' },
+      ],
       {
-        path: 'home',
-        loadChildren: () =>
-          import('./home/src').then((module) => module.HomeModule),
-      },
-      { path: '', pathMatch: 'full', redirectTo: 'home' },
-      { path: '**', redirectTo: 'home' },
-    ],
-      {
-      initialNavigation: 'enabled'
-    }),
+        initialNavigation: 'enabled',
+      }
+    ),
   ],
   declarations: [],
-  exports: [NavModule]
+  exports: [NavModule],
 })
 export class ProfileSiteLibModule {}
