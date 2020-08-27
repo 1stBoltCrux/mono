@@ -1,0 +1,15 @@
+@import 'framework';
+
+:host {
+max-width: rem(320px);
+}
+
+.project-wrapper {
+  img {
+    max-width: 100%;
+  }
+
+  mat-card {
+    margin-bottom: rem(16px);
+  }
+}

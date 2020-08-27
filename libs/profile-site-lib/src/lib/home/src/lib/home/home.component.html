@@ -1,5 +1,14 @@
-<div class="home-wrapper" *ngIf="">
-  <profile-site-project >
-
-  </profile-site-project>
+<div class="home-wrapper" *ngIf="projects$ | async as projects">
+  <div class="left-column">
+    <ng-container *ngFor="let project of projects; index as i">
+      <profile-site-project *ngIf="i % 2 !== 0"  [project]="project">
+      </profile-site-project>
+    </ng-container>
+  </div>
+  <div class="right-column">
+    <ng-container *ngFor="let project of projects; index as i">
+      <profile-site-project *ngIf="i % 2 === 0"  [project]="project">
+      </profile-site-project>
+    </ng-container>
+  </div>
 </div>

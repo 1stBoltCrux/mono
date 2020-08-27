@@ -37,7 +37,10 @@ import { HttpClientModule } from '@angular/common/http';
     EffectsModule.forRoot([AppEffects]),
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreModule.forFeature(fromApp.APP_FEATURE_KEY, fromApp.reducer),
+    StoreModule.forRoot({
+      app: fromApp.reducer,
+      router: routerReducer
+    }),
     BrowserAnimationsModule,
   ],
   providers: [AppFacade],

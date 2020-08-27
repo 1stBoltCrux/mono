@@ -1,6 +1,12 @@
-/**
- * Interface for the 'App' data
- */
-export interface AppEntity {
-  id: string | number; // Primary ID
+export interface AppState {
+  loaded: boolean;
+  projects: Project[];
+}
+
+export interface Project {
+  name: string;
+  description: string;
+  technologies: string[];
+  url: string;
+  img: string;
 }

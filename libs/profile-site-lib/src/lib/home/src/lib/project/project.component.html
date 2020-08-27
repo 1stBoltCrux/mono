@@ -1,1 +1,20 @@
-<p>project works!</p>
+<div class="project-wrapper">
+  <mat-card>
+    <div class="card-image-wrapper">
+      <img [src]="project.img" alt="">
+    </div>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          {{project.name}}
+        </mat-expansion-panel-header>
+          <mat-panel-description>
+            {{project.description}}
+          </mat-panel-description>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

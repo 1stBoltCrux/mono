@@ -2,27 +2,31 @@
   "projects": [
     {
       "name": "Placeholder",
+      "description": "A technology I used for this thing.",
       "technologies": "Placeholder",
       "url": "www.google.com",
-      "img": "assets/img.jpg"
+      "img": "assets/images/garfield.jpg"
     },
     {
       "name": "Placeholder",
+      "description": "A technology I used for this thing.",
       "technologies": "Placeholder",
       "url": "www.google.com",
-      "img": "assets/img.jpg"
+      "img": "assets/images/garfield.jpg"
     },
     {
       "name": "Placeholder",
+      "description": "A technology I used for this thing.",
       "technologies": "Placeholder",
       "url": "www.google.com",
-      "img": "assets/img.jpg"
+      "img": "assets/images/garfield.jpg"
     },
     {
       "name": "Placeholder",
+      "description": "A technology I used for this thing.",
       "technologies": "Placeholder",
       "url": "www.google.com",
-      "img": "assets/img.jpg"
+      "img": "assets/images/garfield.jpg"
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppFacade } from 'apps/profile-site/src/app/+state/app.facade';
 
 @Component({
   selector: 'profile-site-home',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  projects$ = this.facade.projects$;
+
+  constructor(private facade: AppFacade ) { }
 
   ngOnInit(): void {
   }

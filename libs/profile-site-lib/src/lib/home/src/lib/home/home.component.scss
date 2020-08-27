@@ -3,3 +3,24 @@
 :host {
   color: $air-superiority-blue;
 }
+
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: rem(16px 16px 0 16px);
+  @include breakpoint(medium) {
+    flex-direction: row;
+  }
+
+  .right-column {
+    @include breakpoint(medium) {
+      padding-left: rem(8px);
+    }
+  }
+
+  .left-column {
+    @include breakpoint(medium) {
+      padding-right: rem(8px);
+    }
+  }
+}
