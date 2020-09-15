@@ -14,7 +14,14 @@ const appReducer = createReducer(
     ...app
   })
   ),
-  on(AppActions.loadAppFailure, (state, { error }) => ({ ...state, error }))
+  on(AppActions.loadAppFailure, (state, { error }) => ({ ...state, error })),
+  on(AppActions.fetchNoaaData, (state) => ({ ...state, noaaDataloaded: false, error: null })),
+  on(AppActions.fetchNoaaDataSuccess, (state, { noaaData }) => ({
+    ...state,
+    noaaData
+  })
+  ),
+  on(AppActions.fetchNoaaDataFailure, (state, { error }) => ({ ...state, error }))
 );
 
 export function reducer(state: AppState | undefined, action: Action) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppFacade } from 'apps/profile-site/src/app/+state/app.facade';
 
 @Component({
   selector: 'mono-scratch',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scratch.component.scss']
 })
 export class ScratchComponent implements OnInit {
+  noaaData$ = this.facade.noaaData$;
 
-  constructor() { }
+  constructor(private facade: AppFacade ) { }
 
   ngOnInit(): void {
+    this.facade.fetchNoaaData();
   }
 
 }

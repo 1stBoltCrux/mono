@@ -12,3 +12,17 @@ export const loadAppFailure = createAction(
   '[App] Load App Failure',
   props<{ error: any }>()
 );
+
+export const fetchNoaaData = createAction(
+  '[App] Fetch NOAA Data',
+);
+
+export const fetchNoaaDataSuccess = createAction(
+  '[App] Fetch NOAA Data Success',
+  props<{ noaaData: any }>()
+);
+
+export const fetchNoaaDataFailure = createAction(
+  '[App] Fetch NOAA Data Failure',
+  props<{ error: any }>()
+);

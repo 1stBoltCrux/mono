@@ -44,6 +44,7 @@
     "@ngrx/router-store": "9.1.0",
     "@ngrx/store": "9.1.0",
     "@nrwl/angular": "10.0.8",
+    "d3": "^6.1.1",
     "rxjs": "~6.5.5",
     "sass-rem": "^2.0.1",
     "zone.js": "^0.10.2"
