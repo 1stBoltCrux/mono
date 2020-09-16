@@ -15,8 +15,9 @@ export class AppFacade {
     AppSelectors.ProfileSiteAppStateQuery.getProjects
   );
   weatherData$ = this.store.select(
-    AppSelectors.ProfileSiteAppStateQuery.getNoaaData
+    AppSelectors.ProfileSiteAppStateQuery.getWeatherData
   );
+  formattedDailyWeatherData$ = this.store.select(AppSelectors.ProfileSiteAppStateQuery.getFormattedDailyWeatherData)
   loadApp() {
     this.store.dispatch(loadApp());
   }

@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState, NoaaData } from './app.models';
-import { Project } from './app.models';
+import { AppState } from './app.models';
+import { getDay } from 'date-fns';
+import { DAYS_OF_THE_WEEK, kelvinToFahrenheit } from './app.constants';
 
 const getAppState = createFeatureSelector<AppState>('app');
 
@@ -9,12 +10,36 @@ const getProjects = createSelector(
   state => state && state.projects
 )
 
-const getNoaaData = createSelector(
+const getWeatherData = createSelector(
   getAppState,
-  state => state && state.noaaData
+  state => state && state.weatherData
+)
+
+const getDailyWeatherData = createSelector(
+  getWeatherData,
+  weatherData => weatherData && weatherData.daily
+)
+
+const getFormattedDailyWeatherData = createSelector(
+  getDailyWeatherData,
+  weatherData => {
+    if (!weatherData) return null;
+    return weatherData.map(day => {
+      return {
+        ...day,
+        dt: DAYS_OF_THE_WEEK[getDay(new Date(day.dt * 1000))],
+        temp: {
+          ...day.temp,
+          day: kelvinToFahrenheit(day.temp.day)
+        }
+      }
+    })
+  }
+
 )
 
 export const ProfileSiteAppStateQuery = {
   getProjects,
-  getNoaaData
+  getWeatherData,
+  getFormattedDailyWeatherData
 }

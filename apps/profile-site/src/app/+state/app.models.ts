@@ -8,6 +8,7 @@ export interface AppState {
 
 export interface WeatherData {
   data: any;
+  daily: any[]
 }
 
 export interface Project {
