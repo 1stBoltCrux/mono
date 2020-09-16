@@ -3,7 +3,9 @@ import * as AppActions from './app.actions';
 import { AppState } from './app.models';
 
 export const initialState = {
-  loaded: false
+  loaded: false,
+  error: null,
+  weatherData: null,
 }
 
 const appReducer = createReducer(
@@ -15,13 +17,16 @@ const appReducer = createReducer(
   })
   ),
   on(AppActions.loadAppFailure, (state, { error }) => ({ ...state, error })),
-  on(AppActions.fetchNoaaData, (state) => ({ ...state, noaaDataloaded: false, error: null })),
-  on(AppActions.fetchNoaaDataSuccess, (state, { noaaData }) => ({
+  on(AppActions.fetchWeatherData, (state) => ({ ...state, weatherDataLoaded: false, error: null })),
+  on(AppActions.fetchWeatherDataSuccess, (state, { weatherData }) => ({
     ...state,
-    noaaData
+    weatherData
   })
   ),
-  on(AppActions.fetchNoaaDataFailure, (state, { error }) => ({ ...state, error }))
+  on(AppActions.fetchWeatherDataFailure, (state, { error }) => ({ ...state, error })),
+  on(AppActions.loadWeatherDataFromLocalStorage, (state) => ({ ...state, weatherDataLoaded: false, error: null })),
+  on(AppActions.loadWeatherDataFromLocalStorageSuccess, (state, { weatherData }) => ({ ...state, weatherData })),
+  on(AppActions.loadWeatherDataFromLocalStorageFailure, (state, { error }) => ({ ...state, error })),
 );
 
 export function reducer(state: AppState | undefined, action: Action) {

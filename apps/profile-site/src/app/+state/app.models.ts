@@ -1,11 +1,12 @@
 export interface AppState {
+  error: any;
   loaded: boolean;
-  noaaDataLoaded: boolean;
+  weatherDataLoaded: boolean;
   projects: Project[];
-  noaaData: NoaaData;
+  weatherData: WeatherData;
 }
 
-export interface NoaaData {
+export interface WeatherData {
   data: any;
 }
 

@@ -1,1 +1,2 @@
-export const noaaUrl = "https://www.ncei.noaa.gov/access/services/data/v1?dataset=global-summary-of-the-year&dataTypes=DP01,DP05,DP10,DSND,DSNW,DT00,DT32,DX32,DX70,DX90,SNOW,PRCP&stations=ASN00084027&startDate=1952-01-01&endDate=1970-12-31&includeAttributes=true&format=json"
+export const OPEN_WEATHER_URL =
+  'https://api.openweathermap.org/data/2.5/onecall?lat=60.99&lon=30.9&dt=1600041600&appid=';

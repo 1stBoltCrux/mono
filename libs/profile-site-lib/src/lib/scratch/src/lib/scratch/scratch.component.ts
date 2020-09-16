@@ -7,12 +7,18 @@ import { AppFacade } from 'apps/profile-site/src/app/+state/app.facade';
   styleUrls: ['./scratch.component.scss']
 })
 export class ScratchComponent implements OnInit {
-  noaaData$ = this.facade.noaaData$;
+  noaaData$ = this.facade.weatherData$;
 
   constructor(private facade: AppFacade ) { }
 
   ngOnInit(): void {
-    this.facade.fetchNoaaData();
+    const localStorageWeatherData = localStorage.getItem('weatherData');
+
+    if (localStorageWeatherData) {
+      this.facade.loadWeatherDataFromLocalStorage();
+    } else {
+      this.facade.fetchWeatherData();
+    }
   }
 
 }

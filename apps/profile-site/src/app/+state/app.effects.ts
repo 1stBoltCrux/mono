@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import { noaaUrl } from './app.constants';
+import { OPEN_WEATHER_URL } from './app.constants';
 import * as AppActions from './app.actions';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -17,7 +17,6 @@ export class AppEffects {
           this.http
             .get(environment.dataPath + environment.stateJSON)
             .pipe(
-              tap(thing => console.log(thing)),
               map((payload: any) => AppActions.loadAppSuccess({app: payload}))
             ),
         onError: (action, error) => {
@@ -28,24 +27,43 @@ export class AppEffects {
     )
   );
 
-  fetchNoaaData$ = createEffect(() =>
+  fetchWeatherData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AppActions.fetchNoaaData),
+      ofType(AppActions.fetchWeatherData),
       fetch({
         run: () => 
           this.http
-            .get(noaaUrl)
+            .get(`${OPEN_WEATHER_URL}`)
             .pipe(
-              tap(thing => console.log(thing)),
-              map((payload: any) => AppActions.fetchNoaaDataSuccess({noaaData: payload}))
+              map((payload: any) => AppActions.fetchWeatherDataSuccess({weatherData: payload}))
             ),
         onError: (action, error) => {
           console.error('Error', error);
-          return AppActions.fetchNoaaDataFailure({ error });
+          return AppActions.fetchWeatherDataFailure({ error });
         },
       })
     )
   );
+
+  fetchWeatherDataSuccess$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(AppActions.fetchWeatherDataSuccess),
+      tap(({weatherData}) => {
+        localStorage.setItem('weatherData', JSON.stringify(weatherData));
+      })
+    ),
+    {dispatch: false}
+  )
+
+  loadWeatherDataFromLocalStorage$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(AppActions.loadWeatherDataFromLocalStorage),
+      map(() => {
+        const localStorageWeatherData = JSON.parse(localStorage.getItem('weatherData'));
+        return AppActions.loadWeatherDataFromLocalStorageSuccess({ weatherData: localStorageWeatherData });
+      })
+    )
+  )
 
   constructor(private actions$: Actions, private http: HttpClient) {}
 }
