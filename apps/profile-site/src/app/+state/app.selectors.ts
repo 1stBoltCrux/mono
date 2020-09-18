@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from './app.models';
-import { getDay } from 'date-fns';
+import { getDay, format } from 'date-fns';
 import { DAYS_OF_THE_WEEK, kelvinToFahrenheit } from './app.constants';
 
 const getAppState = createFeatureSelector<AppState>('app');
@@ -27,7 +27,7 @@ const getFormattedDailyWeatherData = createSelector(
     return weatherData.map(day => {
       return {
         ...day,
-        dt: DAYS_OF_THE_WEEK[getDay(new Date(day.dt * 1000))],
+        dt:`${DAYS_OF_THE_WEEK[getDay(new Date(day.dt * 1000))]} ${format(new Date(day.dt * 1000), 'MM/dd/yyyy')}` ,
         temp: {
           ...day.temp,
           day: kelvinToFahrenheit(day.temp.day)

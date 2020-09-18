@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
+import { wrapD3Text } from './../../../../../../../../apps/profile-site/src/app/+state/app.constants'
 
 @Component({
   selector: 'profile-site-graph',
@@ -8,6 +9,7 @@ import * as d3 from 'd3';
 })
 export class GraphComponent implements OnInit {
   @Input() weatherData$;
+  @Input() title;
   private svg;
   private margin = 40;
   private width = 600 - this.margin * 2;
@@ -36,14 +38,19 @@ export class GraphComponent implements OnInit {
     graph
       .append('g')
       .attr('transform', `translate(0, ${this.height})`)
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x))
+      .selectAll('.tick text')
+      .attr('font-size', '9px')
+      .call(wrapD3Text, x.bandwidth(), d3)    
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.temp.day)])
+      .domain([0, d3.max(data, (d) => d.humidity)])
       .range([this.height, 0]);
 
-    graph.append('g').call(d3.axisLeft(y));
+    graph.append('g')
+      .call(d3.axisLeft(y).tickFormat(d => d + '%'))
+    
 
     graph
       .selectAll('rect')
@@ -57,8 +64,8 @@ export class GraphComponent implements OnInit {
       .attr('y', this.height)
       .transition()
       .duration(500)
-      .attr('y', (d) => y(d.temp.day))
-      .attr('height', (d) => this.height - y(d.temp.day));
+      .attr('y', (d) => y(d.humidity))
+      .attr('height', (d) => this.height - y(d.humidity));
   };
 
   constructor() {}
