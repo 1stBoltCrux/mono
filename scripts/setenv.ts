@@ -5,8 +5,9 @@ const { argv } = require('yargs');
 const { spawn } = require('child_process');
 import * as prompt from 'prompt';
 const colors = require('colors/safe');
+import { environments } from './environments';
 
-prompt.message = colors.white('Enter project name:');
+prompt.message = colors.white('Enter project name');
 
 var path = require('path');
 // read environment variables from .env file
@@ -27,20 +28,15 @@ prompt.get('projectName', (err, result) => {
   if (err) {
     return onError(err);
   }
-  projectEnvironmentsDirectory = `./apps/${result.projectName}/src/environments/`;
+  const { projectName } = result;
+  projectEnvironmentsDirectory = `./apps/${projectName}/src/environments/`;
   const targetPath = isProduction
     ? `${projectEnvironmentsDirectory}environment.prod.ts`
     : `${projectEnvironmentsDirectory}environment.ts`;
   // we have access to our environment variables
   // in the process.env object thanks to dotenv
-  const environmentFileContent = `
-  export const environment = {
-     production: ${isProduction},
-     OPEN_WEATHER_API_KEY: "${process.env.OPEN_WEATHER_API_KEY}",
-     dataPath: 'assets/data/',
-     stateJSON: 'data.json'
-  };
-  `;
+  const environmentFileContent = environments(projectName, isProduction)
+
   // write the content to the respective file
   writeFile(targetPath, environmentFileContent, (err) => {
     if (err) {
@@ -50,14 +46,14 @@ prompt.get('projectName', (err, result) => {
     }
   });
 
-  const ngServeProject = spawn('ng', ['serve', result.projectName]);
+  const ngServeProject = spawn('ng', ['serve', projectName]);
 
   ngServeProject.stdout.on('data', (data) => {
-    console.log(data);
+    console.log(data.toString('utf-8'));
   });
 
   ngServeProject.stderr.on('data', (data) => {
-    console.log(data);
+    console.log(data.toString('utf-8'));
   });
 
   ngServeProject.on('error', (error) => {
