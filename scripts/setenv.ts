@@ -4,40 +4,30 @@ const { writeFile } = require('fs');
 const { argv } = require('yargs');
 const { spawn } = require('child_process');
 import * as prompt from 'prompt';
-const colors = require('colors/safe');
 import { environments } from './environments';
-
-prompt.message = colors.white('Enter project name');
-
-var path = require('path');
 // read environment variables from .env file
 require('dotenv').config();
 // read the command line arguments passed with yargs
 const environment = argv.environment;
+// set up prompt message and prompt message color
+prompt.message = ('Enter project name');
 const isProduction = environment === 'prod';
 let projectEnvironmentsDirectory;
-
-if (!process.env.OPEN_WEATHER_API_KEY) {
-  console.error('Please provide OPEN_WEATHER_API_KEY in .env file');
-  process.exit(-1);
-}
 
 prompt.start();
 
 prompt.get('projectName', (err, result) => {
   if (err) {
-    return onError(err);
+    console.log(err);
+    return 1;
   }
   const { projectName } = result;
   projectEnvironmentsDirectory = `./apps/${projectName}/src/environments/`;
   const targetPath = isProduction
-    ? `${projectEnvironmentsDirectory}environment.prod.ts`
-    : `${projectEnvironmentsDirectory}environment.ts`;
-  // we have access to our environment variables
-  // in the process.env object thanks to dotenv
-  const environmentFileContent = environments(projectName, isProduction)
-
-  // write the content to the respective file
+  ? `${projectEnvironmentsDirectory}environment.prod.ts`
+  : `${projectEnvironmentsDirectory}environment.ts`;
+  const environmentFileContent = environments(projectName, isProduction);
+  
   writeFile(targetPath, environmentFileContent, (err) => {
     if (err) {
       console.log(err);
@@ -45,7 +35,9 @@ prompt.get('projectName', (err, result) => {
       console.log(`Wrote variables to ${targetPath}`);
     }
   });
-
+  
+  // ng serve the project and log the output 
+  
   const ngServeProject = spawn('ng', ['serve', projectName]);
 
   ngServeProject.stdout.on('data', (data) => {
@@ -64,8 +56,3 @@ prompt.get('projectName', (err, result) => {
     console.log(`child process exited with code ${code}`);
   });
 });
-
-const onError = (err) => {
-  console.log(err);
-  return 1;
-};

@@ -45,7 +45,6 @@
     "@ngrx/router-store": "9.1.0",
     "@ngrx/store": "9.1.0",
     "@nrwl/angular": "10.0.8",
-    "colors": "^1.4.0",
     "d3": "^6.1.1",
     "date-fns": "^2.16.1",
     "prompt": "^1.0.0",
