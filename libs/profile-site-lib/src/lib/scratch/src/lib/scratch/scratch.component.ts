@@ -8,11 +8,9 @@ import { AppFacade } from 'apps/profile-site/src/app/+state/app.facade';
 })
 export class ScratchComponent implements OnInit {
   weatherData$ = this.facade.formattedDailyWeatherData$;
-
   constructor(private facade: AppFacade ) { }
 
   ngOnInit(): void {
-    this.weatherData$.subscribe(thing => console.log(thing))
     const localStorageWeatherData = localStorage.getItem('weatherData');
 
     if (localStorageWeatherData) {

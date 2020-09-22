@@ -28,14 +28,11 @@ export const wrapD3Text = (text, width, d3) => {
       line.push(word)
       tspan.text(line.join(" "))
       if (tspan.node().getComputedTextLength() > width) {
-        console.log(width)
-        console.log(tspan.node().getComputedTextLength())
         line.pop()
         tspan.text(line.join(" "))
         line = [word]
         tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
       }
     }
-    console.log(line)
   })
 }

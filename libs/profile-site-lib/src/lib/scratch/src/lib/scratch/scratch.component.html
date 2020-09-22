@@ -1,5 +1,7 @@
 
-<profile-site-graph
-title="Humidity"
-[weatherData$]="weatherData$"
-></profile-site-graph>
+<ng-container *ngIf="weatherData$ | async as weatherData">
+  <profile-site-graph
+  title="Humidity"
+  [weatherData]="weatherData"
+  ></profile-site-graph>
+</ng-container>

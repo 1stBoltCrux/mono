@@ -33,7 +33,7 @@ export class AppEffects {
       fetch({
         run: () => 
           this.http
-            .get(`${OPEN_WEATHER_URL}`)
+            .get(`${OPEN_WEATHER_URL}${environment.OPEN_WEATHER_API_KEY}`)
             .pipe(
               map((payload: any) => AppActions.fetchWeatherDataSuccess({weatherData: payload}))
             ),

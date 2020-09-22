@@ -1,79 +1,128 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import * as d3 from 'd3';
-import { wrapD3Text } from './../../../../../../../../apps/profile-site/src/app/+state/app.constants'
+import { wrapD3Text } from './../../../../../../../../apps/profile-site/src/app/+state/app.constants';
+import { ResizeService } from '@mono/shared';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'profile-site-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
 })
-export class GraphComponent implements OnInit {
-  @Input() weatherData$;
+export class GraphComponent implements AfterViewInit, OnInit, OnDestroy {
+  @Input() weatherData;
   @Input() title;
+  resizeSubscription$: Subscription;
   private svg;
   private margin = 40;
-  private width = 600 - this.margin * 2;
-  private height = 600 - this.margin * 2;
+  @ViewChild('canvas') private chartContainer: ElementRef;
 
-  createSvg = () => {
-    this.svg = d3
-      .select('#canvas')
-      .append('svg')
-      .attr('width', this.width + this.margin * 2)
-      .attr('height', this.height + this.margin * 2);
+  formatData = (data) => {
+    return data.map((datum) => {
+      const splitDate = datum.dt.split(' ');
+      const singleLetterDayLabel = splitDate[0].split('')[0];
+      const dayOfTheMonth = splitDate[1].split('/')[1];
+      return {
+        ...datum,
+        dt: `${singleLetterDayLabel} - ${dayOfTheMonth}`,
+      };
+    });
   };
 
-  drawGraph = (data: any) => {
+  drawGraph = (
+    data: any,
+    windowWidth: number
+  ) => {
+    const fontSize = windowWidth < 600 ? '7px' : '9px';
+    const element = this.chartContainer.nativeElement;
+    const contentWidth = element.offsetWidth - this.margin * 2;
+    const contentHeight = element.offsetHeight - this.margin * 2;
+    let formattedData = data;
+
+    if (windowWidth < 600) {
+      formattedData = this.formatData(data);
+    }
+
+    console.log(formattedData);
+
+    d3.select('svg').remove();
+
+    this.svg = d3
+      .select(element)
+      .append('svg')
+      .attr('width', element.offsetWidth + this.margin * 2)
+      .attr('height', element.offsetHeight + this.margin * 2);
+
     const graph = this.svg
       .append('g')
-      .attr('width', this.width)
-      .attr('height', this.height)
+      .attr('width', contentWidth)
+      .attr('height', contentHeight)
       .attr('transform', `translate(${this.margin}, ${this.margin})`);
     const x = d3
       .scaleBand()
-      .domain(data.map((day) => day.dt))
-      .range([0, this.width])
+      .domain(formattedData.map((day) => day.dt))
+      .range([0, contentWidth])
       .padding(0.2);
 
     graph
       .append('g')
-      .attr('transform', `translate(0, ${this.height})`)
+      .attr('transform', `translate(0, ${contentHeight})`)
       .call(d3.axisBottom(x))
       .selectAll('.tick text')
-      .attr('font-size', '9px')
-      .call(wrapD3Text, x.bandwidth(), d3)    
+      .attr('font-size', fontSize)
+      .call(wrapD3Text, x.bandwidth(), d3);
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.humidity)])
-      .range([this.height, 0]);
+      .domain([0, d3.max(formattedData, (d) => d.humidity)])
+      .range([contentHeight, 0]);
 
-    graph.append('g')
-      .call(d3.axisLeft(y).tickFormat(d => d + '%'))
-    
+    graph.append('g').call(d3.axisLeft(y).tickFormat((d) => d + '%'));
 
     graph
       .selectAll('rect')
-      .data(data)
+      .data(formattedData)
       .enter()
       .append('rect')
       .attr('width', x.bandwidth)
       .attr('height', 0)
       .attr('fill', 'blue')
       .attr('x', (d) => x(d.dt))
-      .attr('y', this.height)
+      .attr('y', contentHeight)
       .transition()
       .duration(500)
       .attr('y', (d) => y(d.humidity))
-      .attr('height', (d) => this.height - y(d.humidity));
+      .attr('height', (d) => contentHeight - y(d.humidity));
   };
 
-  constructor() {}
+  constructor(private resizeService: ResizeService) {}
 
   ngOnInit(): void {
-    this.createSvg();
-    this.weatherData$.subscribe(data => {
-      this.drawGraph(data);
-    });
+    this.resizeSubscription$ = this.resizeService.$resize.subscribe(
+      (windowWidth) => {
+        // redraw graph on window width change
+        this.drawGraph(this.weatherData, windowWidth);
+      }
+    );
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.weatherData) {
+      return;
+    }
+    // grab initial window width
+    this.drawGraph(this.weatherData, window.innerWidth);
+  }
+
+  ngOnDestroy(): void {
+    this.resizeSubscription$.unsubscribe();
   }
 }
