@@ -48,8 +48,9 @@ export class AppEffects {
   fetchWeatherDataSuccess$ = createEffect(() => 
     this.actions$.pipe(
       ofType(AppActions.fetchWeatherDataSuccess),
-      tap(({weatherData}) => {
-        localStorage.setItem('weatherData', JSON.stringify(weatherData));
+      tap(({ weatherData }) => {
+        const weatherDataWithTimeStamp = { ...weatherData, timeStamp: new Date()}
+        localStorage.setItem('weatherData', JSON.stringify(weatherDataWithTimeStamp));
       })
     ),
     {dispatch: false}

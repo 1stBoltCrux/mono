@@ -1,7 +1,14 @@
 
 <ng-container *ngIf="weatherData$ | async as weatherData">
-  <profile-site-graph
-  title="Humidity"
-  [weatherData]="weatherData"
-  ></profile-site-graph>
+    <profile-site-graph
+    title="Humidity"
+    [weatherData]="weatherData"
+    [windowWidth]="windowWidth"
+    ></profile-site-graph>
+    <profile-site-line-graph
+    title="Temperature"
+    [weatherData]="weatherData"
+    [windowWidth]="windowWidth"
+    >
+    </profile-site-line-graph>
 </ng-container>

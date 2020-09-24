@@ -1,12 +1,12 @@
 import { Injectable, HostListener } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { debounceTime, throttleTime, map } from 'rxjs/operators'
+import { debounceTime, map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResizeService {
-  public $resize = fromEvent(window, 'resize')
+  public resize$ = fromEvent(window, 'resize')
     .pipe(
       debounceTime(150),
       map((e: any) => {
