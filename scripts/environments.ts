@@ -1,6 +1,7 @@
 // list of project names and the keys of their necessary secrets
 const environmentValidation = {
   'profile-site': ['OPEN_WEATHER_API_KEY'],
+  'react-guide': [],
 };
 
 export const environments = (projectName, isProduction) => {
@@ -9,7 +10,9 @@ export const environments = (projectName, isProduction) => {
       throw new Error(`Project is missing ${envKey} property in .env`);
     }
   });
+
   let environment;
+
   switch (projectName) {
     case 'profile-site':
       environment = `export const environment = {
@@ -20,6 +23,10 @@ export const environments = (projectName, isProduction) => {
    };
    `;
       break;
+    case 'react-guide':
+      environment = `export const environment = {
+        production: false,
+      };`;
     default:
       environment = null;
       break;

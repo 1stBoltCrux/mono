@@ -46,6 +46,16 @@
     },
     "profile-site-lib-src-lib-scratch": {
       "tags": []
+    },
+    "react-guide": {
+      "tags": []
+    },
+    "react-guide-e2e": {
+      "tags": [],
+      "implicitDependencies": ["react-guide"]
+    },
+    "react-guide-lib": {
+      "tags": []
     }
   }
 }

@@ -27,7 +27,7 @@ const getFormattedDailyWeatherData = createSelector(
     return weatherData.map(day => {
       return {
         ...day,
-        dt:`${DAYS_OF_THE_WEEK[getDay(new Date(day.dt * 1000))]} ${format(new Date(day.dt * 1000), 'MM/dd/yyyy')}` ,
+        formattedTime:`${DAYS_OF_THE_WEEK[getDay(new Date(day.dt * 1000))]} ${format(new Date(day.dt * 1000), 'MM/dd/yyyy')}` ,
         temp: {
           ...day.temp,
           day: kelvinToFahrenheit(day.temp.day)

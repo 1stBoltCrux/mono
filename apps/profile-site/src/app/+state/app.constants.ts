@@ -20,7 +20,7 @@ export const kelvinToFahrenheit = (k) => {
 
 export const formatData = (data) => {
   return data.map((datum) => {
-    const splitDate = datum.dt.split(' ');
+    const splitDate = datum.formattedTime.split(' ');
     const singleLetterDayLabel = splitDate[0].split('')[0];
     const dayOfTheMonth = splitDate[1].split('/')[1];
     return {
@@ -32,10 +32,17 @@ export const formatData = (data) => {
 
 export const niceDomain = (data) => {
   const niceDomains = [];
-  data.forEach((val) => {
-    const fixedVal = val.toFixed(0);
-    if (niceDomains.indexOf(+fixedVal) < 0) {
-      niceDomains.push(+fixedVal);
+  data.forEach((val, i) => {
+    let roundedVal;
+    // create top and bottom range 
+    if (i === data.length - 1) {
+      roundedVal = Math.floor(val)
+    } else {
+      roundedVal = Math.ceil(val)
+    }
+    // don't push duplicate values
+    if (niceDomains.indexOf(roundedVal) < 0) {
+      niceDomains.push(roundedVal);
     }
   }); 
   return niceDomains;

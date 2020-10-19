@@ -53,7 +53,7 @@ export class GraphComponent implements AfterViewInit, OnChanges {
       .attr('transform', `translate(${this.margin}, ${this.margin})`);
     const x = d3
       .scaleBand()
-      .domain(formattedData.map((day) => day.dt))
+      .domain(formattedData.map((day) => day.formattedTime))
       .range([0, contentWidth])
       .padding(0.2);
 
@@ -80,7 +80,7 @@ export class GraphComponent implements AfterViewInit, OnChanges {
       .attr('width', x.bandwidth)
       .attr('height', 0)
       .attr('fill', 'blue')
-      .attr('x', (d) => x(d.dt))
+      .attr('x', (d) => x(d.formattedTime))
       .attr('y', contentHeight)
       .transition()
       .duration(500)

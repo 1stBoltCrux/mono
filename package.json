@@ -45,12 +45,17 @@
     "@ngrx/router-store": "9.1.0",
     "@ngrx/store": "9.1.0",
     "@nrwl/angular": "10.0.8",
+    "@nrwl/react": "^10.0.8",
     "d3": "^6.1.1",
     "date-fns": "^2.16.1",
     "prompt": "^1.0.0",
     "rxjs": "~6.5.5",
     "sass-rem": "^2.0.1",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.10.2",
+    "document-register-element": "1.13.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.0",
@@ -75,6 +80,17 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
     "typescript": "~3.9.3",
-    "yargs": "^16.0.3"
+    "yargs": "^16.0.3",
+    "@nrwl/web": "10.0.8",
+    "@nrwl/react": "10.0.8",
+    "@types/react": "16.9.38",
+    "@types/react-dom": "16.9.8",
+    "@testing-library/react": "10.4.1",
+    "@babel/core": "7.9.6",
+    "@babel/preset-env": "7.9.6",
+    "@babel/preset-typescript": "7.9.0",
+    "@babel/preset-react": "7.9.4",
+    "babel-jest": "25.1.0",
+    "@types/react-router-dom": "5.1.5"
   }
 }

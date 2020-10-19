@@ -52,11 +52,13 @@ export class LineGraphComponent implements OnChanges, AfterViewInit {
       .attr('height', contentHeight)
       .attr('transform', `translate(${this.margin}, ${this.margin})`);
 
+
     const x = d3
-      .scaleBand()
-      .domain(data.map((day) => day.dt))
+      .scaleTime()
+      .domain(d3.extent(data, day => new Date(day.dt * 1000)))
+      .nice()
       .range([0, contentWidth])
-      .padding(0.2);
+      // .padding(0.2);
 
     const y = d3
       .scaleLinear()
@@ -69,11 +71,13 @@ export class LineGraphComponent implements OnChanges, AfterViewInit {
       .append('g')
       .attr('class', 'x-axis')
       .attr('transform', `translate(0, ${contentHeight})`)
-      .call(d3.axisBottom(x))
+      .call(
+        d3.axisBottom(x)
+      )
       .selectAll('.tick text')
       .attr('font-size', fontSize)
-      .call(wrapD3Text, x.bandwidth(), d3);
-
+      // .call(wrapD3Text, x.bandwidth(), d3);
+    console.log(data)
     graph
       .append('g')
       .call(
@@ -83,10 +87,35 @@ export class LineGraphComponent implements OnChanges, AfterViewInit {
           .tickFormat((d) => d + 'deg')
       )
       .attr('class', 'y-axis');
-    // set scale domains
+    
+    const circles = graph.selectAll('circle')
+      .data(data)
+      
+    circles.enter()
+      .append('circle')
+      .attr('r', 4)
+      .attr('cx', d => x(new Date(d.dt * 1000)))
+      .attr('cy', d => y(d.temp.day))
+      .attr('fill', '#ccc')
+    
+    // d3 line generator
+    
+    const line = d3.line()
+    .x(d => x(new Date(d.dt * 1000)))
+      .y(d => y(d.temp.day))
+    
+    
+    const path = graph.append('path')
+    // paths expect an array within an array
+    path.data([data])
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+      .attr('stroke-width', 2)
+    .attr('d', line)
 
-    // create axis
+
   };
+
 
   ngOnChanges(): void {
     if (this.windowWidth) {

@@ -29,7 +29,8 @@
       ],
       "@mono/profile-site-lib/src/lib/scratch": [
         "libs/profile-site-lib/src/lib/scratch/src/index.ts"
-      ]
+      ],
+      "@mono/react-guide-lib": ["libs/react-guide-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
